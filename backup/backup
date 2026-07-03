@@ -1,0 +1,50 @@
+#!/bin/bash
+# =============================================================================
+# backup — Automated backup script for recently modified project files
+# =============================================================================
+#
+# Description:
+#   Archives all files modified within the last 24 hours from a source
+#   directory into a timestamped .tar.gz, moves it to a backup folder,
+#   and prunes backups older than 7 days.
+#
+# Usage:
+#   backup
+#
+#   (This script is added to $PATH, so it can be run from any directory.)
+#
+# Output:
+#   ~/backup/backup_YYYY-MM-DD_HH-MM-SS.tar.gz
+#
+# Requirements:
+#   - bash, find, tar
+#
+# Author:  Anant Rajput
+# =============================================================================
+<<task
+this script will auotmate the task of taking backup of the newly modified files
+task
+
+project="project"
+backupDestination="${HOME}/backup"
+backupFileName="backup_$(date +"%Y-%m-%d")_$(date +%I-%M-%S).tar.gz"
+backupSource="${HOME}/"${project}""
+
+if [[ ! -d "${backupSource}" ]]; then
+	echo "No path found"
+	exit 1
+fi
+
+mkdir -p ~/backup
+
+cd "${backupSource}"
+
+find "${backupSource}" -type f -mtime -1 | tar -czvf "${backupFileName}" -T -
+
+mv "${backupFileName}" "${backupDestination}"
+
+cd "${backupDestination}"
+
+find . -name "backup*" -type f -mtime +7 -exec rm {} +
+
+cd "${backupSource}"
