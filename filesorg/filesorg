@@ -1,0 +1,51 @@
+#!/bin/bash
+
+
+# organize — Sorts files into folders based on their extension
+# =============================================================================
+#
+# Description:
+#   Scans a given directory and moves each file into a subfolder named
+#   after its file extension (e.g. photo.jpg -> jpg/photo.jpg).
+#   Subdirectories are left untouched.
+#
+# Usage:
+#   organize <directory>
+#
+#   (This script can be added to $PATH to run from anywhere.)
+#
+# Output:
+#   Subfolders created inside <directory>, one per file extension,
+#   containing the matching files.
+#
+# Requirements:
+#   - bash
+#
+# Author:  Anant Rajput
+# =============================================================================
+
+# --- Validate input -----------------------------------------------------
+
+
+folderDestination="${1}"
+
+if [[ -z "$folderDestination" ]]; then
+    echo "Usage: $0 <directory>"
+    exit 1
+fi
+
+if [[ ! -d "${folderDestination}" ]]; then
+    echo "PATH DON'T EXIST"
+    exit 1
+fi
+
+cd "${folderDestination}"
+
+for file in *
+do
+    [[ -f "$file" ]] || continue
+    fileExtension="${file##*.}"
+    mkdir -p "${fileExtension}"
+    mv "${file}" "${fileExtension}"
+done
+
