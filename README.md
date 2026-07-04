@@ -1,4 +1,4 @@
-# Bash Scripts# Bash Scripts
+# Bash Scripts 
 A collection of small, focused Bash scripts built to automate everyday tasks — backups, cleanup, system checks, and other things I got tired of doing manually.
 
 Each script lives in its own folder with a short description below and its own usage notes inside the script itself.
