@@ -1,6 +1,6 @@
 # Bash Scripts
 
-A collection of small, focused Bash scripts built to automate everyday tasks — backups, file organization, connectivity checks, and other things I got tired of doing manually.
+A collection of small, focused Bash scripts built to automate everyday tasks — backups, file organization, connectivity checks, user provisioning, and other things I got tired of doing manually.
 
 Each script lives in its own folder with a short description below and its own usage notes inside a dedicated README.
 
@@ -13,6 +13,7 @@ Each script lives in its own folder with a short description below and its own u
 | [`backup`](./backup) | Automates backing up recently modified files into a timestamped `.tar.gz`, with auto-cleanup of old backups | Working |
 | [`filesorg`](./filesorg) | Sorts files in a directory into subfolders based on their file extension | Working |
 | [`site-check`](./site-check) | Checks whether a given website or host is reachable via a single ping and reports the connection status | Working |
+| [`user_make`](./user_make) | Creates a new local user account with a randomly generated password and forces it to expire on first login | Working |
 
 *(New scripts will be added here as they're built.)*
 
@@ -47,7 +48,8 @@ source ~/.zshrc
 ## Requirements
 
 - Bash (v4+ recommended)
-- Standard Unix utilities — `find`, `tar`, `mv`, `ping`, `date`, etc.
+- Standard Unix utilities — `find`, `tar`, `mv`, `ping`, `date`, `useradd`, `chpasswd`, `passwd`, etc.
+- Some scripts (like `user_make`) require root/sudo privileges to run
 - Anything script-specific is called out in that script's own README
 
 ---
@@ -65,6 +67,9 @@ bash-scripts/
 │   └── README.md           # Script-specific notes
 ├── site-check/
 │   ├── site-check           # The script itself
+│   └── README.md           # Script-specific notes
+├── user_make/
+│   ├── user_make            # The script itself
 │   └── README.md           # Script-specific notes
 └── ...more scripts as they're added
 ```

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [[ ${UID} -ne 0 ]]
+then
+	echo "Please run with sudo or root."
+	exit 1
+fi
+
+
+if [[ ${#} -lt 1 ]]
+then 
+	echo "Usage: ${0} USERNAME [COMMENT]"
+	echo "Create a user with name USERNAME and comments filed of comment"
+	exit 1
+fi
+
+USERNAME="${1}"
+
+shift
+
+COMMENT="${@}"
+
+PASSWORD=$(date +%s%N)
+
+useradd -c ${COMMENT} -M ${USERNAME}
+
+if [[ $? -ne 0 ]]
+then 
+	echo "The account could not be created."
+	exit 1
+fi
+
+echo ${PASSWORD} | passwd --stdin ${USERNAME}
+
+passwd -e ${USERNAME}
+
+echo
+echo "Username: ${USERNAME}"
+echo
+echo "Password: ${PASSWORD}"
+echo
+echo "Hostname: ${hostname}"
