@@ -1,4 +1,21 @@
 #!/bin/bash
+#
+# user_make
+#
+# Creates a new local user account with a randomly generated password
+# and forces the password to expire on first login.
+#
+# Usage:
+#   sudo ./user_make USERNAME [COMMENT]
+#
+# Example:
+#   sudo ./user_make anant "Anant Rajput"
+#
+# Requirements:
+#   - Must be run as root or with sudo.
+#
+# Author:  Anant Rajput
+# Updated: 2026-07-05
 
 if [[ ${UID} -ne 0 ]]
 then
