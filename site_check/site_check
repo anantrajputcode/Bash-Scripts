@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# =============================================================================
+# site-check — Quick connectivity checker for a given site or host
+# =============================================================================
+#
+# Description:
+#   Prompts the user for a site or host, sends a single ping to check
+#   reachability, and reports whether the connection succeeded or failed.
+#
+# Usage:
+#   site-check
+#
+#   (This script is added to $PATH, so it can be run from any directory.)
+#
+# Output:
+#   Prints a success or failure message to the terminal based on the
+#   ping result.
+#
+# Requirements:
+#   - bash, ping
+#
+# Author:  Anant Rajput
+# =============================================================================
+
+read -p "Which site you want to check: " site
+
+ping -c 1 ${site} &> /dev/null
+
+status=$?
+
+sleep 5s
+if [[ $status -eq 0 ]]
+then
+    echo "successfully connected to site "${site}""
+
+else 
+    echo "Unable to connect to the site."
+
+fi
+
+exit 0
